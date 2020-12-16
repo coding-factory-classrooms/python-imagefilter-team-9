@@ -25,14 +25,19 @@ def check_args():
                             for x in filters_array:
                                 filter_value = x.split(':')
 
-                                if filter_value[0] == 'blur' and int(filter_value[1]) or filter_value[0] == 'dilate' and int(filter_value[1]) or filter_value[0] == 'grayscale':
-                                    try:
-                                        filter_dictionary[filter_value[0]] = filter_value[1]
-                                    except IndexError:
-                                        filter_dictionary[filter_value[0]] = ''
+                                try:
+                                    if filter_value[0] == 'blur' and int(filter_value[1]) or filter_value[0] == 'dilate' and int(filter_value[1]) or filter_value[0] == 'grayscale':
+                                        try:
+                                            filter_dictionary[filter_value[0]] = filter_value[1]
+                                        except IndexError:
+                                            filter_dictionary[filter_value[0]] = ''
 
-                                else:
-                                    print('Invalid filters command')
+                                    else:
+                                        print('Invalid filters command')
+                                        sys.exit()
+
+                                except ValueError:
+                                    print('Invalid number given to filter value')
                                     sys.exit()
 
                             # Give to command_dictionary all filters data
@@ -46,6 +51,9 @@ def check_args():
                             output_directory = args[i+1]
                             command_dictionary['output_directory'] = output_directory
 
+                        elif args[i] == '--log-file' and len(args) >= i+1:
+                            logger_file = args[i+1]
+                            command_dictionary['logger_file'] = logger_file
 
                         else:
                             print(f'{args[i]} is an invalid command')
