@@ -9,4 +9,5 @@ import cli
 # blur()
 dilate()
 
-cli.check_args()
+args = cli.check_args()
+print(args)

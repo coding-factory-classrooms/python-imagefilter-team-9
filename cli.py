@@ -5,6 +5,7 @@ args = sys.argv
 def check_args():
 
     filter_dictionary = {}
+    command_dictionary = {}
 
     if len(args) > 1:
         if args[1] == '-h':
@@ -18,34 +19,44 @@ def check_args():
             while i < len(args):
                 # Detect an argument
                 if args[i][0] == '-':
+                    try:
+                        if args[i] == '--filters' and args[i+1]:
+                            filters_array = args[i+1].split('|')
+                            for x in filters_array:
+                                filter_value = x.split(':')
 
-                    if args[i] == '--filters' and args[i+1]:
-                        filters_array = args[i+1].split('|')
-                        for x in filters_array:
-                            filter_value = x.split(':')
+                                if filter_value[0] == 'blur' and int(filter_value[1]) or filter_value[0] == 'dilate' and int(filter_value[1]) or filter_value[0] == 'grayscale':
+                                    try:
+                                        filter_dictionary[filter_value[0]] = filter_value[1]
+                                    except IndexError:
+                                        filter_dictionary[filter_value[0]] = ''
 
-                            if filter_value[0] == 'blur' and int(filter_value[1]) or filter_value[0] == 'dilate' and int(filter_value[1]) or filter_value[0] == 'grayscale':
-                                try:
-                                    filter_dictionary[filter_value[0]] = filter_value[1]
-                                except IndexError:
-                                    filter_dictionary[filter_value[0]] = ''
-                            else:
-                                print('Invalid filters command')
+                                else:
+                                    print('Invalid filters command')
+                                    sys.exit()
 
-                    elif args[i] == '-i' and len(args) >= i+1:
-                        input_directory = args[i+1]
-                        print('Input directory : ' + input_directory)
+                            # Give to command_dictionary all filters data
+                            command_dictionary['filters'] = filter_dictionary
 
-                    elif args[i] == '-o' and len(args) >= i+1:
-                        output_directory = args[i+1]
-                        print('Output directory : ' + output_directory)
+                        elif args[i] == '-i' and len(args) >= i+1:
+                            input_directory = args[i+1]
+                            command_dictionary['input_directory'] = input_directory
 
-                    else:
-                        print(f'{args[i]} is an invalid command')
+                        elif args[i] == '-o' and len(args) >= i+1:
+                            output_directory = args[i+1]
+                            command_dictionary['output_directory'] = output_directory
+
+
+                        else:
+                            print(f'{args[i]} is an invalid command')
+                    except IndexError:
+                        print('Invalid command')
+                        sys.exit()
 
 
 
 
                 i += 1
-            print(filter_dictionary)
+
+    return command_dictionary
 
