@@ -2,7 +2,7 @@ import cv2
 
 def blur():
     racine = '/Users/Ugo/Documents/dev/itescia/08_imageFilter/python-imagefilter-team-9/'
-    #racine = 'C:\Users\DOBRO\Desktop\Filter\imgs\MV.png'
+    #racine = 'C:/Users/DOBRO/Desktop/Filter/'
 
     blur_intensity = 33
 
