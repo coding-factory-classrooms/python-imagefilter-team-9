@@ -1,16 +1,22 @@
 import cv2
-from os import listdir
-import os.pathhh
 import cli
 import sys
-from init_file import get_settings
-from filters.grayscal import make_it_gray
+import logger
+import os.path
+from init_file import get_default_input_dir, get_default_output_dir
+from os import listdir
 from filters.blur import blur
 from filters.dilate import dilate
+from filters.grayscal import make_it_gray
 
 # Variable initiation
 path = '/Users/Ugo/Documents/dev/itescia/08_imageFilter/python-imagefilter-team-9/'
 #path = 'C:/Users/DOBRO/Desktop/Filter/'
+
+# If user doesn't give input or output directory in CLI, get them from the init file
+init_file = 'filterimg.ini'
+input_dir = get_default_input_dir(init_file)
+output_dir = get_default_output_dir(init_file)
 
 commands = cli.check_args()
 
@@ -57,14 +63,17 @@ for img in imgs:
         for k, v in filters.items():
             if k == 'blur':
                 image = blur(image, int(v))
+                logger.log(f'{img} was blurred with an intensity of {v}')
 
             if k == 'dilate':
                 image = dilate(image, int(v))
+                logger.log(f'{img} was dilated with an intensity of {v}')
 
             if k == 'grayscal':
                 image = make_it_gray(image)
+                logger.log(f'{img} was converted into black and white')
 
         # Save the new image
         cv2.imwrite(f'{path}{output_dir}/{img}', image)
 
-print('Done !')
+logger.log('Done !')

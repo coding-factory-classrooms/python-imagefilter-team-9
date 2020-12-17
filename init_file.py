@@ -30,6 +30,21 @@ def get_settings(init_file):
 
     return init_var_dictionary
 
+def get_default_input_dir(init_file):
+    parser = SafeConfigParser()
+    parser.read(init_file)
+    input_dir = parser.get('general', 'input_dir')
+
+    return input_dir
+
+
+def get_default_output_dir(init_file):
+    parser = SafeConfigParser()
+    parser.read(init_file)
+    output_dir = parser.get('general', 'output_dir')
+
+    return output_dir
+
 
 
 

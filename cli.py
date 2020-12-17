@@ -1,5 +1,6 @@
 import sys
 import init_file
+import logger
 
 args = sys.argv
 
@@ -83,5 +84,6 @@ def check_args():
         init_file_path = 'filterimg.ini'
         command_dictionary = init_file.get_settings(init_file_path)
 
+    logger.log(f'Program was run with parameters :\n{command_dictionary}')
     return command_dictionary
 
