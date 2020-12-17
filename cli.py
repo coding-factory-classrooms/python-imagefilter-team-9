@@ -82,7 +82,13 @@ def check_args():
                     # Check if there is a parameter after '--config-file' argument
                     elif args[i] == '--config-file' and len(args) >= i + 1:
                         config_file = args[i + 1]
-                        command_dictionary['init_file'] = config_file
+                        file_extension = os.path.splitext(config_file)[1]
+                        if file_extension == '.ini':
+                            command_dictionary = init_file.get_settings(config_file)
+                            break
+                        else:
+                            print(f'{config_file} is not a good file name, please enter a .ini file')
+                            sys.exit()
 
                     # Check if there is a parameter after '--config-file' argument
                     elif args[i] == '--list-filters' and len(args) >= i + 1:
@@ -108,6 +114,5 @@ def check_args():
         init_file_path = 'filterimg.ini'
         command_dictionary = init_file.get_settings(init_file_path)
 
-    logger.log(f'Program was run with parameters :\n{command_dictionary}', logger_file)
     return command_dictionary
 

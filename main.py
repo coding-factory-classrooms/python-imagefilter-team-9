@@ -11,6 +11,7 @@ from filters.filter_ze_team import filter_ze_team
 from init_file import get_default_input_dir, get_default_output_dir
 
 # Variable initiation
+logger_file = 'image_filter.log'
 path = '/Users/Ugo/Documents/dev/itescia/08_imageFilter/python-imagefilter-team-9/'
 #path = 'C:/Users/DOBRO/Desktop/Filter/'
 
@@ -49,6 +50,7 @@ except KeyError:
     sys.exit()
 
 
+logger.log(f'Program was run with parameters :\n{commands}', logger_file)
 imgs = listdir(path + input_dir)
 
 for img in imgs:
