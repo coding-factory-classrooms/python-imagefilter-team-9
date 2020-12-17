@@ -1,7 +1,7 @@
 import cv2
 
 def filter_ze_team(image):
-    font = cv2.FONT_HERSHEY_SIMPLEX
+    font = cv2.FONT_HERSHEY_TRIPLEX
     org = (50, 50)
     fontScale = 1
     color = (255, 0, 0)
