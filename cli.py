@@ -1,13 +1,10 @@
 import os
 import sys
 from os import listdir
-
 import init_file
-import logger
-import inspect
-import filters as filters
 
 args = sys.argv
+
 
 def check_args():
     """
@@ -17,7 +14,7 @@ def check_args():
     filter_dictionary = {}
     command_dictionary = {}
 
-    # Check if there is args
+    # Check if there is some args
     if len(args) > 1:
         i = 1
         while i < len(args):
@@ -91,7 +88,7 @@ def check_args():
                             sys.exit()
 
                     # Check if there is a parameter after '--config-file' argument
-                    elif args[i] == '--list-filters' and len(args) >= i + 1:
+                    elif args[i] == '--list-filters':
                         filters_package = listdir('filters')
 
                         print('Available filters :')

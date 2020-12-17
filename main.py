@@ -36,10 +36,12 @@ for k, v in commands.items():
 
 # Check if input directory doesn't exists
 if not os.path.exists(input_dir):
+    # Create input directory
     os.mkdir(input_dir)
 
 # Check if output directory doesn't exists
 if not os.path.exists(output_dir):
+    # Create output directory
     os.mkdir(output_dir)
 
 # Check if user given filters parameters
@@ -49,10 +51,9 @@ except KeyError:
     print('No filters given')
     sys.exit()
 
-
 logger.log(f'Program was run with parameters :\n{commands}', logger_file)
-imgs = listdir(path + input_dir)
 
+imgs = listdir(path + input_dir)
 for img in imgs:
     img_extension = os.path.splitext(path + input_dir + img)[1]
 

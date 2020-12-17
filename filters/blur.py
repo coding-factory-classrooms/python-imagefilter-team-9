@@ -1,9 +1,10 @@
 import cv2
 
+
 def blur(image, blur_intensity):
     """
     Apply blur effect on an image
-    :param image: image on which we well apply the effect
+    :param image: image on which we will apply the effect
     :param blur_intensity: the intensity of blur
     :return: the image blurred
     """
