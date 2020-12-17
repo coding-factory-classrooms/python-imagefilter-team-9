@@ -72,7 +72,12 @@ def check_args():
                     # Check if there is a parameter after '--log-file' argument
                     elif args[i] == '--log-file' and len(args) >= i + 1:
                         logger_file = args[i + 1]
-                        command_dictionary['logger_file'] = logger_file
+                        file_extension = os.path.splitext(logger_file)[1]
+                        if file_extension == '.log':
+                            command_dictionary['logger_file'] = logger_file
+                        else:
+                            print(f'{logger_file} is not a good file name, please enter a .log file')
+                            sys.exit()
 
                     # Check if there is a parameter after '--config-file' argument
                     elif args[i] == '--config-file' and len(args) >= i + 1:
