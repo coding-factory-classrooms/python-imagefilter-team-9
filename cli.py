@@ -26,7 +26,7 @@ def check_args():
                                 filter_value = x.split(':')
 
                                 try:
-                                    if filter_value[0] == 'blur' and int(filter_value[1]) or filter_value[0] == 'dilate' and int(filter_value[1]) or filter_value[0] == 'grayscale':
+                                    if filter_value[0] == 'blur' and int(filter_value[1]) % 2 != 0 or filter_value[0] == 'dilate' and int(filter_value[1]) % 2 != 0 or filter_value[0] == 'grayscale':
                                         try:
                                             filter_dictionary[filter_value[0]] = filter_value[1]
                                         except IndexError:
@@ -60,9 +60,6 @@ def check_args():
                     except IndexError:
                         print('Invalid command')
                         sys.exit()
-
-
-
 
                 i += 1
 
