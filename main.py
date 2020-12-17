@@ -49,20 +49,12 @@ for img in imgs:
         for k, v in filters.items():
             if k == 'blur':
                 image = blur(image, int(v))
-                print(f'{img} was blured')
 
             if k == 'dilate':
                 image = dilate(image, int(v))
-                print(f'{img} was dilated')
 
-            if k == 'grayscale':
+            if k == 'grayscal':
                 image = make_it_gray(image)
-                print(f'{img} was grayscaled')
 
         cv2.imwrite(f'{path}{output_dir}/{img}', image)
-
-# blur(image, 9)
-# dilate(image, 10)
-
-
-
+        print('Done !')

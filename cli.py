@@ -25,7 +25,7 @@ def check_args():
                                 filter_value = x.split(':')
 
                                 try:
-                                    if filter_value[0] == 'blur' and int(filter_value[1]) % 2 != 0 or filter_value[0] == 'dilate' and int(filter_value[1]) % 2 != 0 or filter_value[0] == 'grayscale':
+                                    if filter_value[0] == 'blur' and int(filter_value[1]) % 2 != 0 or filter_value[0] == 'dilate' and int(filter_value[1]) % 2 != 0 or filter_value[0] == 'grayscal':
                                         try:
                                             filter_dictionary[filter_value[0]] = filter_value[1]
                                         except IndexError:
@@ -55,8 +55,8 @@ def check_args():
                             command_dictionary['logger_file'] = logger_file
 
                         elif args[i] == '--config-file' and len(args) >= i+1:
-                            filterimg.ini = args[i+1]
-                            command_dictionary['filters.imi'] =filterimg.ini
+                            filterimg = args[i+1]
+                            command_dictionary['filters.ini'] = filterimg
 
                         else:
                             print(f'{args[i]} is an invalid command')
