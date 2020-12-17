@@ -2,6 +2,7 @@ import cv2
 from os import listdir
 import os.path
 import cli
+import sys
 from filters.grayscal import make_it_gray
 from filters.blur import blur
 from filters.dilate import dilate
@@ -34,7 +35,11 @@ if not os.path.exists(output_dir):
 
 
 imgs = listdir(path + input_dir)
-filters = command_dictionary['filters']
+try :
+    filters = command_dictionary['filters']
+except KeyError:
+    print('No filters given')
+    sys.exit()
 
 for img in imgs:
     img_extension = os.path.splitext(path + input_dir + img)[1]
