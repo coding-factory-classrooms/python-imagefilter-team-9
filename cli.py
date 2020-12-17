@@ -1,6 +1,11 @@
+import os
 import sys
+from os import listdir
+
 import init_file
 import logger
+import inspect
+import filters as filters
 
 args = sys.argv
 
@@ -34,7 +39,7 @@ def check_args():
                                 filter_value = x.split(':')
 
                                 try:
-                                    if filter_value[0] == 'blur' and int(filter_value[1]) % 2 != 0 or filter_value[0] == 'dilate' and int(filter_value[1]) % 2 != 0 or filter_value[0] == 'grayscal':
+                                    if filter_value[0] == 'blur' and int(filter_value[1]) % 2 != 0 or filter_value[0] == 'dilate' and int(filter_value[1]) % 2 != 0 or filter_value[0] == 'grayscal' or filter_value[0] == 'filter_ze_team':
                                         try:
                                             filter_dictionary[filter_value[0]] = filter_value[1]
                                         except IndexError:
@@ -70,6 +75,17 @@ def check_args():
                         elif args[i] == '--config-file' and len(args) >= i+1:
                             filterimg = args[i+1]
                             command_dictionary['init_file'] = filterimg
+
+                        # Check if there is a parameter after '--config-file' argument
+                        elif args[i] == '--list-filters' and len(args) >= i+1:
+                            filters_package = listdir('filters')
+
+                            print('Available filters :')
+                            for filter_file in filters_package:
+                                file_extension = os.path.splitext(filter_file)[1]
+                                if file_extension == '.py':
+                                    print(' - ' + filter_file.replace('.py', ''))
+                            sys.exit()
 
                         else:
                             print(f'{args[i]} is an invalid command')

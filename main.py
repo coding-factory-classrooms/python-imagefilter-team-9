@@ -3,11 +3,12 @@ import cli
 import sys
 import logger
 import os.path
-from init_file import get_default_input_dir, get_default_output_dir
 from os import listdir
 from filters.blur import blur
 from filters.dilate import dilate
 from filters.grayscal import make_it_gray
+from filters.filter_ze_team import filter_ze_team
+from init_file import get_default_input_dir, get_default_output_dir
 
 # Variable initiation
 path = '/Users/Ugo/Documents/dev/itescia/08_imageFilter/python-imagefilter-team-9/'
@@ -72,6 +73,10 @@ for img in imgs:
             if k == 'grayscal':
                 image = make_it_gray(image)
                 logger.log(f'{img} was converted into black and white')
+
+            if k == 'filter_ze_team':
+                image = filter_ze_team(image)
+                logger.log(f'The names of the team was wrote on the image {img}')
 
         # Save the new image
         cv2.imwrite(f'{path}{output_dir}/{img}', image)
