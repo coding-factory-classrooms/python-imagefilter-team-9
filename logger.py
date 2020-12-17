@@ -2,8 +2,7 @@ from datetime import datetime
 
 
 # create the log file format
-def log(msg):
-    log_file = 'image_filter.log'
+def log(msg, log_file):
     now = datetime.now()
     timestamp = now.strftime('%d/%m/%Y %H:%M:%S')
     formatted = f'{timestamp} - {msg}'

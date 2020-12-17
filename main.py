@@ -64,21 +64,21 @@ for img in imgs:
         for k, v in filters.items():
             if k == 'blur':
                 image = blur(image, int(v))
-                logger.log(f'{img} was blurred with an intensity of {v}')
+                logger.log(f'{img} was blurred with an intensity of {v}', logger_file)
 
             if k == 'dilate':
                 image = dilate(image, int(v))
-                logger.log(f'{img} was dilated with an intensity of {v}')
+                logger.log(f'{img} was dilated with an intensity of {v}', logger_file)
 
             if k == 'grayscal':
                 image = make_it_gray(image)
-                logger.log(f'{img} was converted into black and white')
+                logger.log(f'{img} was converted into black and white', logger_file)
 
             if k == 'filter_ze_team':
                 image = filter_ze_team(image)
-                logger.log(f'The names of the team was wrote on the image {img}')
+                logger.log(f'The names of the team was wrote on the image {img}', logger_file)
 
         # Save the new image
         cv2.imwrite(f'{path}{output_dir}/{img}', image)
 
-logger.log('Done !')
+logger.log('Done !', logger_file)
