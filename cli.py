@@ -1,17 +1,24 @@
 import sys
+import init_file
 
 args = sys.argv
 
 def check_args():
+    """
+    Get args given by the user in the CLI
+    :return: a dictionary with all the commands given by the user
+    """
     filter_dictionary = {}
     command_dictionary = {}
 
+    # Check if there is args
     if len(args) > 1:
         if args[1] == '-h':
             print('Usage : imagefilter')
             print('-h, ----help')
             print('-i, --input-dir <directory>')
             print('-o, --output-dir <directory>')
+            sys.exit()
 
         else:
             i = 1
@@ -19,6 +26,7 @@ def check_args():
                 # Detect an argument
                 if args[i][0] == '-':
                     try:
+                        # Check if there is some parameters after '--filters' argument
                         if args[i] == '--filters' and args[i+1]:
                             filters_array = args[i+1].split('|')
                             for x in filters_array:
@@ -42,29 +50,38 @@ def check_args():
                             # Give to command_dictionary all filters data
                             command_dictionary['filters'] = filter_dictionary
 
+                        # Check if there is a parameter after '-i' argument
                         elif args[i] == '-i' and len(args) >= i+1:
                             input_directory = args[i+1]
-                            command_dictionary['input_directory'] = input_directory
+                            command_dictionary['input_dir'] = input_directory
 
+                        # Check if there is a parameter after '-o' argument
                         elif args[i] == '-o' and len(args) >= i+1:
                             output_directory = args[i+1]
-                            command_dictionary['output_directory'] = output_directory
+                            command_dictionary['output_dir'] = output_directory
 
+                        # Check if there is a parameter after '--log-file' argument
                         elif args[i] == '--log-file' and len(args) >= i+1:
                             logger_file = args[i+1]
                             command_dictionary['logger_file'] = logger_file
 
+                        # Check if there is a parameter after '--config-file' argument
                         elif args[i] == '--config-file' and len(args) >= i+1:
                             filterimg = args[i+1]
-                            command_dictionary['filters.ini'] = filterimg
+                            command_dictionary['init_file'] = filterimg
 
                         else:
                             print(f'{args[i]} is an invalid command')
+                            sys.exit()
                     except IndexError:
                         print('Invalid command')
                         sys.exit()
 
                 i += 1
+    # Case where there is no arg, then take data from init file
+    else:
+        init_file_path = 'filterimg.ini'
+        command_dictionary = init_file.get_settings(init_file_path)
 
     return command_dictionary
 
