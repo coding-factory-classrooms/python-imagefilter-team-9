@@ -3,7 +3,6 @@ import sys
 args = sys.argv
 
 def check_args():
-
     filter_dictionary = {}
     command_dictionary = {}
 
@@ -54,6 +53,10 @@ def check_args():
                         elif args[i] == '--log-file' and len(args) >= i+1:
                             logger_file = args[i+1]
                             command_dictionary['logger_file'] = logger_file
+
+                        elif args[i] == '--config-file' and len(args) >= i+1:
+                            filterimg.ini = args[i+1]
+                            command_dictionary['filters.imi'] =filterimg.ini
 
                         else:
                             print(f'{args[i]} is an invalid command')
